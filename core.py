@@ -19,7 +19,11 @@ sys.stdout.reconfigure(encoding="utf-8") if hasattr(sys.stdout, "reconfigure") e
 import formulas as FM
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_CSV = os.path.join(BASE_DIR, "data", "fc3d-history.csv")
+# CSV 路径统一: 优先根目录 fc3d-history.csv (云端/统一布局), 兼容旧 data/ 布局
+if os.path.exists(os.path.join(BASE_DIR, "fc3d-history.csv")):
+    DATA_CSV = os.path.join(BASE_DIR, "fc3d-history.csv")
+else:
+    DATA_CSV = os.path.join(BASE_DIR, "data", "fc3d-history.csv")
 CACHE_JSON = os.path.join(BASE_DIR, "cache", "backtest.json")
 SRC_CSV = r"D:\福彩3D资料\fc3d-history.csv"
 

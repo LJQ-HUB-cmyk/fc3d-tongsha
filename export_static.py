@@ -16,7 +16,7 @@ sys.stdout.reconfigure(encoding="utf-8") if hasattr(sys.stdout, "reconfigure") e
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CACHE_JSON = os.path.join(BASE_DIR, "cache", "backtest.json")
-OUT_HTML = os.path.join(BASE_DIR, "index.html")
+OUT_HTML = os.environ.get("OUT_HTML") or os.path.join(BASE_DIR, "通杀一码.html")
 
 # 内置样式 (不再依赖 static/index.html)
 CSS_TEXT = """
@@ -258,11 +258,11 @@ def main():
         f.write(html)
     s = data["summary"]
     n = data["next"]
-    print(f"已生成网页: {OUT_HTML}")
+    print(f"已生成固定网页: {OUT_HTML}")
     print(f"数据至 {data['data_last_issue']} 期 | 公式池 {data['formula_count']} 个")
     print(f"机制: {n['formula_name']} | 回测 {s['hit']}/{s['total']} = {s['rate']*100:.2f}%")
     print(f"下一期 {n['target_issue']} 杀 {n['kill']}")
-    print("GitHub Pages 自动发布。")
+    print("双击打开即可浏览, 或传到手机查看。")
 
 
 if __name__ == "__main__":

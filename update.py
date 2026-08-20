@@ -14,6 +14,9 @@ import time
 
 sys.stdout.reconfigure(encoding="utf-8") if hasattr(sys.stdout, "reconfigure") else None
 
+# 云端输出文件名固定为 index.html (export_static 在 import 时读环境变量)
+os.environ.setdefault("OUT_HTML", "index.html")
+
 import core
 import export_static
 
@@ -93,9 +96,8 @@ def fetch_zhcw():
 
 
 def fetch_apihz():
-    """④ apihz JSON API"""
-    for url in ("https://api.apihz.cn/api/kaijiang/fc3d/list.php",
-                "https://api.apihz.cn/api/caipiao/fc3d.php?id=10005145&key=c4d6c4c6a8d1a05ba2a01b17b7b1c56b&type=json"):
+    """④ apihz JSON API (无key公开接口)"""
+    for url in ("https://api.apihz.cn/api/kaijiang/fc3d/list.php",):
         text = http_get(url)
         if not text:
             continue
