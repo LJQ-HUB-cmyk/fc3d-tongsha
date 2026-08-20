@@ -1,0 +1,35 @@
+name: fc3d-tongsha-daily
+on:
+  schedule:
+    - cron: '0 14 * * *'
+    - cron: '30 15 * * *'
+    - cron: '0 17 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# 防排队: 同一时间只允许一个运行
+concurrency:
+  group: fc3d-tongsha-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: install deps
+        run: pip install numpy requests
+      - name: run update (fetch + recompute + build html)
+        run: python update.py
+      - name: commit & push
+        run: |
+          git config user.name "fc3d-bot"
+          git config user.email "bot@fc3d.local"
+          git add fc3d-history.csv index.html core.py formulas.py export_static.py update.py .github/workflows/daily.yml
+          git diff --staged --quiet || git commit -m "auto: $(date -u +'%Y-%m-%d %H:%M') UTC"
+          git push
