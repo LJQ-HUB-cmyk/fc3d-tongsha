@@ -34,5 +34,8 @@ jobs:
           git config user.name "fc3d-bot"
           git config user.email "bot@fc3d.local"
           git add fc3d-history.csv index.html core.py formulas.py export_static.py update.py .github/workflows/daily.yml
-          git diff --staged --quiet || git commit -m "auto: $(date -u +'%Y-%m-%d %H:%M') UTC"
-          git push
+          git diff --staged --quiet && echo "无变更, 跳过推送" || {
+            git commit -m "auto: $(date -u +'%Y-%m-%d %H:%M') UTC"
+            git pull --rebase origin main   # 兜底: 防手工推送/并发导致的 push 冲突
+            git push
+          }
