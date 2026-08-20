@@ -201,7 +201,7 @@ function render(d){{
   $("dataInfo").textContent = "数据至 " + d.data_last_issue + " 期 · 共 " + d.data_count + " 期 · 公式池 " + d.formula_count + " (固定快照)";
   $("fc").textContent = d.formula_count;
   var num = d.rows[0].num;
-  $("balls").innerHTML = '<div class="ball b">'+num[0]+'</div><div class="ball r">'+num[1]+'</div><div class="ball b">'+num[2]+'</div>';
+  $("balls").innerHTML = '<div class="ball r">'+num[0]+'</div><div class="ball r">'+num[1]+'</div><div class="ball r">'+num[2]+'</div>';
   $("lastIssue").textContent = "第 " + d.data_last_issue + " 期开奖";
   $("killLabel").textContent = n.target_issue + " 期 通杀一码";
   $("killNum").textContent = n.kill;
