@@ -12,7 +12,7 @@
 - **GitHub Actions 三重 cron**：北京 22:00 / 23:30 / 01:00（UTC 14:00 / 15:30 / 17:00），3 次机会兜底，严格在 21:30 开奖后执行
 - **7 源降级链**：灰鸟API → 17500.cn → 中彩网 → apihz → 8200 → 55128 → 彩经网
 - 抓到新期 → **自动追加到 fc3d-history.csv** → 自动重算 → 自动更新 index.html
-- 手机访问：https://hxiaowei0102-web.github.io/fc3d-tongsha/
+- 手机访问：https://ljq-hub-cmyk.github.io/fc3d-tongsha/
 
 ## 文件
 | 文件 | 说明 |
